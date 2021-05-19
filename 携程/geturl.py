@@ -39,7 +39,7 @@ for i in range(min,max):
         #查找其中形如/i/…….html的链接
         result = re.findall(pattern, html)
         print(result)
-        with open(".//pages.txt", 'a') as file:
+        with open("pages.txt", 'a') as file:
             for item in result[::2]:
                 file.write(item+'\n')
         time.sleep(random.random()*3)

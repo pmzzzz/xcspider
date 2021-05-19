@@ -209,12 +209,12 @@ def get_hudong(num: int):
         VisitCount = re.findall('"VisitCount":(\d*?),', Html)[0]
     except:
         pass
-        # 收藏量
+        # 收藏量 --->页面未显示
     try:
         FavouriteCount = re.findall('"FavouriteCount":(.*?),', Html)[0]
     except:
         pass
-    # 点赞数
+    # 点赞数 --> 页面为显示，意义未知
     try:
         LikeCount = re.findall('"LikeCount":(\d*?),', Html)[0]
     except:
@@ -224,7 +224,7 @@ def get_hudong(num: int):
         CommentCount = re.findall('"CommentCount":(\d*?),', Html)[0]
     except:
         pass
-    # 分享数
+    # 分享数 ----> 页面显示红心的数量
     try:
         ShareCount = re.findall('"ShareCount":(\d*?),', Html)[0]
     except:
@@ -256,8 +256,11 @@ def get_user_info(userpage):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36 Edg/90.0.818.62',
     }
     res = requests.get(userpage, headers=headers)
-    soup = BeautifulSoup(res.text, 'html.parser')
-    info = soup.find_all('div', class_="info-side")[0]
+    try:
+        soup = BeautifulSoup(res.text, 'html.parser')
+        info = soup.find_all('div', class_="info-side")[0]
+    except:
+        return -1, -1
     aa = info.find_all('a')
     # print(aa)
     return int(aa[0].string), int(aa[1].string)
