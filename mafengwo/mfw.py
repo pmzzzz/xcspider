@@ -58,12 +58,14 @@ def get_html(url):
     session = requests.Session()
     session.headers = headers
     cookie = get_cookie(url)
+    print(session.cookies)
     session.cookies.update({'__jsl_clearance': cookie})
+    print(session.cookies)
     resp = session.get(url)
     html = resp.text
     # print(html)
     return html
-
+ 
 #
 def parse_html(html):
     print(html)

@@ -337,7 +337,6 @@ if __name__ == '__main__':
         j = 0
         for i in urls[:100]:
             time.sleep(random.random() * 3)
-
             print('--' * 40)
             data = get_xc_detail(base_url + i)
             print(i)
